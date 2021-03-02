@@ -1,11 +1,17 @@
 import * as React from 'react';
-import logo from './logo.svg';
+
+import { observer } from 'mobx-react';
 import DatePicker from './components/DatePicker';
 import TimePicker from './components/TimePicker';
-import './App.css';
 import Confirmation from './components/Confirmation';
 
-function App() {
+import { TimePickerStore } from './components/TimePicker/TimePickerStore';
+import { DatePickerStore } from './components/DatePicker/DatePickerStore';
+
+import './App.scss';
+// I opted for Date as oppose to moment.js for customisability (?)
+//  
+const App = observer(() => {
   const dayInMs = 1000 * 60 * 60 * 24;
   const startTimeInMs = 1000 * 60 * 60 * 6;
   const endTimeInMs = 1000 * 60 * 60 * 21.75;
@@ -21,14 +27,13 @@ function App() {
     startTime.setTime(startTime.getTime() + dayInMs);
     endTime.setTime(endTime.getTime() + dayInMs);
   }
-
   return (
     <div className="App">
-      <DatePicker numDays={28}/>
-      <TimePicker startTime={startTime} endTime={endTime} minuteInterval={minuteInterval}/>
-      <Confirmation selectionTime={startTime} selectionDuration={60}/>
+      <DatePicker datePickerStore={DatePickerStore} numDays={28}/>
+      <TimePicker timePickerStore={TimePickerStore} startTime={startTime} endTime={endTime} minuteInterval={minuteInterval}/>
+      <Confirmation date={DatePickerStore.selectedDate} time={TimePickerStore.selectedTime} duration={60}/>
     </div>
   );
-}
+})
 
 export default App;

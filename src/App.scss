@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+}
+
+ol {
+  list-style-type: none;
+  flex-wrap: wrap;
+  padding: 0 5%;
+  display: flex;
+}
+
+li {
+  flex: 1 0 12%;
+  border: 0.5px solid black;
+  margin: 1%;
+  border-radius: 7px;
+  justify-content: center;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :active {
+    background-color: blueviolet;
+  }
+}
+
+.past-time {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.next-time {
+  border: 1px dashed blue;
+  background: aliceblue;
+}

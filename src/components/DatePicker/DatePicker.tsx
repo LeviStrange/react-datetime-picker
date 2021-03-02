@@ -1,12 +1,15 @@
 import * as React from 'react';
-
+import { observer } from 'mobx-react';
+import { DatePickerStoreImpl } from './DatePickerStore';
 export interface DatePickerProps {
+    datePickerStore: DatePickerStoreImpl,
     numDays:number
 };
 
 export interface DatePickerState {
 
 };
+@observer
 class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
     
     getDates = (startDate:Date, numberOfDays:number) => {
@@ -19,7 +22,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
             if (i < 7) {
                 weekdaysList.push(<li>{`${weekdays[weekDate.getDay()]}`}</li>);
             }
-            datesList.push(<li><a data-date={weekDate} onClick={e => this.storeDate(e)}>{`${weekDate.getDate()} ${months[weekDate.getMonth()]}`}</a></li>);
+            datesList.push(<li data-date={weekDate} onClick={e => this.storeDate(e)}>{`${weekDate.getDate()} ${months[weekDate.getMonth()]}`}</li>);
 
         }
         return  <>
@@ -30,6 +33,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
 
     storeDate = (e:any) => {
         const fullDate = e.target.dataset.date;
+        this.props.datePickerStore.addDate(fullDate);
         // add fullDate to the mobx store file
         // Get the selected date and value.
         // Update the store & pass to confirmation component
