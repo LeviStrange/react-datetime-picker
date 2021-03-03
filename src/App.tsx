@@ -1,16 +1,22 @@
-import * as React from 'react';
+import * as React from "react";
+import { observer } from "mobx-react";
 
-import { observer } from 'mobx-react';
-import DatePicker from './components/DatePicker';
-import TimePicker from './components/TimePicker';
-import Confirmation from './components/Confirmation';
+import DatePicker from "./components/DatePicker";
+import TimePicker from "./components/TimePicker";
+import Confirmation from "./components/Confirmation";
 
-import { TimePickerStore } from './components/TimePicker/TimePickerStore';
-import { DatePickerStore } from './components/DatePicker/DatePickerStore';
-import Config from './config';
-import './App.scss';
-// I opted for Date as oppose to moment.js for customisability (?)
-//  
+import { TimePickerStore } from "./components/TimePicker/TimePickerStore";
+import { DatePickerStore } from "./components/DatePicker/DatePickerStore";
+
+import { Config } from "./config";
+import "./App.scss";
+
+/**
+ * I opted to use standard Date property instead of a library like
+ * moment.js because:
+ * - This project didn't require localisation or a large percentage 
+ * of the features moment.js offers.
+ */ 
 const App = observer(() => {
   const selectedDate:Date = DatePickerStore.selectedDate || new Date();
   const startTime = new Date(0);

@@ -7,7 +7,8 @@ export class TimePickerStoreImpl {
         makeObservable(this, {
             selectedTime: observable,
             count: observable,
-            addTime: action,
+            selectTime: action,
+            deselectTime: action,
             tick: action
         });
         setInterval(() => {
@@ -23,11 +24,18 @@ export class TimePickerStoreImpl {
     };
 
     /**
-     * syncs the user time selection to the selectedTime property
+     * select the user time selection
      * @param dateTime 
      */
-    addTime(dateTime:Date) {
+    selectTime(dateTime:Date) {
         this.selectedTime = dateTime;
+    }
+
+    /**
+     * deselects the user time selection
+     */
+    deselectTime() {
+        this.selectedTime = null;
     }
 }
 

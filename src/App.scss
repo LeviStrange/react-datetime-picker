@@ -9,12 +9,6 @@ ol {
   display: flex;
 }
 
-.dates-list {
-  li:first-of-type {
-    border: 1px dashed blue;
-    background: aliceblue;
-  }
-}
 li {
   flex: 1 0 12%;
   border: 0.5px solid black;
@@ -25,30 +19,50 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
-  :active {
-    background-color: blueviolet;
+}
+
+.dates-list {
+  li:first-of-type {
+    border: 1px dashed blue;
+    background: aliceblue;
   }
-}
-
-.past-time {
-  opacity: 0.4;
-}
-
-.next-time {
-  border: 1px dashed blue;
-  background: aliceblue;
+  li.selected {
+    background: rgba(138, 43, 226, 0.4);
+    border: 1px solid black;
+  }
 }
 
 .times-list {
   margin-bottom: 150px;
+
+  li {
+    flex: 1 0 9%;
+  }
+
+  .past-time {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .next-time {
+    border: 1px dashed blue;
+    background: aliceblue;
+  }
+  .selected {
+    background: rgba(138, 43, 226, 0.4);
+    border: 1px solid black;
+  }
 }
+
+
 
 .confirmation-container {
   position: fixed;
   bottom: 0;
   padding-bottom: 10px;
   width: 100%;
-  background: white;
-
+  background: aliceblue; 
+  opacity: 0.9;
 }

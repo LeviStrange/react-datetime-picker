@@ -6,15 +6,23 @@ export class DatePickerStoreImpl {
     constructor() {
         makeObservable(this, {
             selectedDate: observable,
-            addDate: action
+            selectDate: action,
+            deselectDate: action
         }); 
     }
     /**
-     * syncs the user date selection to the selectedDate property
+     * select the user date selection
      * @param dateTime 
      */
-    addDate(dateTime:Date) {
+    selectDate(dateTime:Date) {
         this.selectedDate = dateTime;
+    }
+
+    /**
+     * deselects the user date selection
+     */
+    deselectDate() {
+        this.selectedDate = null;
     }
 }
 
