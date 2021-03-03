@@ -9,6 +9,10 @@ export class DatePickerStoreImpl {
             addDate: action
         }); 
     }
+    /**
+     * syncs the user date selection to the selectedDate property
+     * @param dateTime 
+     */
     addDate(dateTime:Date) {
         this.selectedDate = dateTime;
     }

@@ -18,8 +18,12 @@ class Confirmation extends React.Component<ConfirmationProps, ConfirmationState>
         const ms = 1000 * 60 * this.props.duration;
         const date:Date|false = this.props.date as Date || false;
         const startTime:Date|false = this.props.time as Date || false;
-        let timeSelected:boolean = false
+        let timeSelected:boolean = false;
+        let dateSelected:boolean = false;
         let endTime:Date = new Date();
+        if (date) {
+            dateSelected = true;
+        }
         if (startTime) {
             timeSelected = true;
             endTime = new Date(startTime.getTime() + ms);
@@ -27,14 +31,17 @@ class Confirmation extends React.Component<ConfirmationProps, ConfirmationState>
 
         return (
             <div className="confirmation-container">
-                <h2>Good choice!</h2>
-                { timeSelected &&
+                <p>Please selected a date then time</p> 
+                { dateSelected &&
+                    <p>Date: {date.toLocaleDateString('en-GB', { weekday: 'short', month: 'short', day: 'numeric' })}</p>
+                }
+                { dateSelected && timeSelected &&
                     <>
-                        <p>{date}</p>
-                        <p>Your slot is: {`${startTime.toLocaleString([], {hour: '2-digit', minute: '2-digit'})} - ${endTime.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}`}</p>
-                        <a {...startTime ? '' : 'disabled'}>NEXT</a>
+                        <p>Time: {`${startTime.toLocaleString([], {hour: '2-digit', minute: '2-digit'})} - ${endTime.toLocaleString([], {hour: '2-digit', minute: '2-digit'})}`}</p>
+                        <a className="next-step" {...startTime ? '' : 'disabled'}>NEXT</a>
                     </>
                 }
+                
             </div>
         )
     }

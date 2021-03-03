@@ -14,11 +14,18 @@ export class TimePickerStoreImpl {
             this.tick()
         }, 60000); 
     }
-
+    /**
+     * Tick function runs every minute re-rendering the
+     * DOM in the case where the 'next-time' changes
+     */
     tick(){
-        ++this.count;
+        this.count = this.count % 1000;
     };
 
+    /**
+     * syncs the user time selection to the selectedTime property
+     * @param dateTime 
+     */
     addTime(dateTime:Date) {
         this.selectedTime = dateTime;
     }

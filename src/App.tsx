@@ -7,31 +7,35 @@ import Confirmation from './components/Confirmation';
 
 import { TimePickerStore } from './components/TimePicker/TimePickerStore';
 import { DatePickerStore } from './components/DatePicker/DatePickerStore';
-
+import Config from './config';
 import './App.scss';
 // I opted for Date as oppose to moment.js for customisability (?)
 //  
 const App = observer(() => {
-  const dayInMs = 1000 * 60 * 60 * 24;
-  const startTimeInMs = 1000 * 60 * 60 * 6;
-  const endTimeInMs = 1000 * 60 * 60 * 21.75;
-  const minuteInterval = 15;
-  const startTime = new Date();
-  startTime.setHours(0, 0, 0, 0);
-  startTime.setTime(startTime.getTime() + startTimeInMs);
-  const endTime = new Date();
-  endTime.setHours(0, 0, 0, 0);
-  endTime.setTime(endTime.getTime() + endTimeInMs);
+  const selectedDate:Date = DatePickerStore.selectedDate || new Date();
+  const startTime = new Date(0);
+  startTime.setTime(startTime.getTime() + Config.startTimeInMs);
+  const endTime = new Date(0);
+  endTime.setTime(endTime.getTime() + Config.endTimeInMs);
 
-  if (new Date() > endTime) {
-    startTime.setTime(startTime.getTime() + dayInMs);
-    endTime.setTime(endTime.getTime() + dayInMs);
-  }
   return (
     <div className="App">
-      <DatePicker datePickerStore={DatePickerStore} numDays={28}/>
-      <TimePicker timePickerStore={TimePickerStore} startTime={startTime} endTime={endTime} minuteInterval={minuteInterval}/>
-      <Confirmation date={DatePickerStore.selectedDate} time={TimePickerStore.selectedTime} duration={60}/>
+      <DatePicker 
+        datePickerStore={DatePickerStore} 
+        numDays={Config.numDays}
+      />
+      <TimePicker 
+        date={selectedDate}
+        timePickerStore={TimePickerStore} 
+        startTime={startTime} 
+        endTime={endTime} 
+        minuteInterval={Config.minuteInterval}
+      />
+      <Confirmation 
+        date={DatePickerStore.selectedDate} 
+        time={TimePickerStore.selectedTime} 
+        duration={Config.duration}
+      />
     </div>
   );
 })
